@@ -1,0 +1,28 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test-on-windows:
+    runs-on: windows-latest
+    environment: test
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+      - name: Install build tools
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: git mingw-w64-x86_64-go
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Test
+        run: |
+          export LANG=ja_JP.UTF-8
+          export LC_ALL=ja_JP.UTF-8
+          go test -v ./...
