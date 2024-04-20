@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+
+	cp "github.com/otiai10/copy"
 )
 
 func List() {
@@ -16,6 +18,10 @@ func List() {
 	for _, v := range list {
 		fmt.Println(v.Name())
 	}
+}
+
+func CopyFile() {
+	cp.Copy("./日本語を含む.txt", "./ascii.txt")
 }
 
 func Read() {
